@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<header>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
+</header>
+<style>
+</style>
+<script>
+//Run out Jquery
+$(document).ready(function(){
+ var url="https://wind-bow.hyperdev.space/twitch-api/streams/freecodecamp?callback=?";
+  $.getJSON(url, function(data1){
+    console.log(data1.stream);
+    if (data1.stream===null){
+      $("#fccStatus").html("Free Code Camp is currently OFFLINE!");
+    } else {
+      $("#fccStatus").html("Free Code Camp is currently ONLINE!");
+    }
+  });
+  var followerURL ="https://api.twitch.tv/kraken/users/freecodecamp/follows/channel/"
+  $.getJSON(followerURL, function(data2){
+  });
+});
+</script>
+<div class="container">
+  <div id="header" class="text-center">
+    <h1>Use the Twitch TV JSON</h1>
+    <a href="https://www.twitch.tv/freecodecamp" target="blank"><h3 id="fccStatus"></h3>
+</a>
+  </div>
+    <div class"row">
+      <h1>
+    <div class="col-md-4">
+      Logo:
+      </div>
+    <div class="col-md-4">
+      Display Name:
+      </div>
+    <div class="col-md-4">
+      Status:
+      </div>
+        </h1>
+  </div>
+    <div id="followerInfo"></div>
+</div>
+</html>
