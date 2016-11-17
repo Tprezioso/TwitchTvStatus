@@ -15,13 +15,10 @@ $(document).ready(function(){
 for (var i = 0; i < channels.length; i++) {
   var url="https://wind-bow.hyperdev.space/twitch-api/streams/"+channels[i]+"?callback=?";
    $.getJSON(url, function(data1){
-    //  console.log(data1);
      if (data1.stream===null){
        status.push("🔴");
-      //  $("#status").html("Free Code Camp is currently OFFLINE!");
      } else {
        status.push("🔵");
-      //  $("#status").html("Free Code Camp is currently ONLINE!");
      }
      var statusString = "";
      for (var i = 0; i < status.length; i++) {
@@ -37,7 +34,7 @@ for (var i = 0; i < channels.length; i++) {
       displayNames.push(data2.display_name);
       var displayString = "";
       for (var i = 0; i < displayNames.length; i++) {
-      displayString += "<br>"+displayNames[i]+"<br>";
+        displayString += "<br>"+displayNames[i]+"<br>";
       }
       $("#first").html(displayString);
     });
@@ -47,8 +44,10 @@ for (var i = 0; i < channels.length; i++) {
 <div class="container">
   <div id="header" class="text-center">
     <h1>Use the Twitch TV JSON</h1>
-    <a href="https://www.twitch.tv/freecodecamp" target="blank"><h3 id="fccStatus"></h3>
-</a>
+    <a href="https://www.twitch.tv/freecodecamp" target="blank">
+      <h3 id="fccStatus">
+      </h3>
+    </a>
   </div>
     <div class"row">
       <h1>
