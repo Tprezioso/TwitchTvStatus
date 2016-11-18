@@ -17,6 +17,7 @@ body {
 $(document).ready(function(){
   var channels = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp"];
   var status = [];
+  var icons = [];
   for (var i = 0; i < channels.length; i++) {
     var url="https://wind-bow.hyperdev.space/twitch-api/streams/"+channels[i]+"?callback=?";
     $.getJSON(url, function(data1){
@@ -37,10 +38,15 @@ $(document).ready(function(){
     var followerURL ="https://wind-bow.hyperdev.space/twitch-api/users/"+channels[i]+"?callback=?"
     $.getJSON(followerURL, function(data2){
       displayNames.push(data2.display_name);
+      icons.push(data2.logo);
+      console.log(icons);
       var displayString = "";
+      var iconString = "";
       for (var i = 0; i < displayNames.length; i++) {
         displayString += "<br>"+displayNames[i]+"<br>";
+        iconString +="<br><img SRC="+icons[i]+" width=45 height=45><br>"
       }
+      $("#icon").html(iconString);
       $("#first").html(displayString);
     });
   }
@@ -56,7 +62,7 @@ $(document).ready(function(){
   </div>
     <div class"row">
       <h1>
-    <div class="col-md-4">
+    <div id="icon" class="col-md-4">
       Logo:
       </div>
     <div id="displayName" class="col-md-4">
