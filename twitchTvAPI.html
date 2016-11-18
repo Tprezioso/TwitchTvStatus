@@ -39,12 +39,11 @@ $(document).ready(function(){
     $.getJSON(followerURL, function(data2){
       displayNames.push(data2.display_name);
       icons.push(data2.logo);
-      console.log(icons);
       var displayString = "";
       var iconString = "";
       for (var i = 0; i < displayNames.length; i++) {
         displayString += "<br>"+displayNames[i]+"<br>";
-        iconString +="<br><img SRC="+icons[i]+" width=45 height=45><br>"
+        iconString +="<br><img SRC="+icons[i]+" width=40 height=40><br>";
       }
       $("#icon").html(iconString);
       $("#first").html(displayString);
@@ -62,8 +61,9 @@ $(document).ready(function(){
   </div>
     <div class"row">
       <h1>
-    <div id="icon" class="col-md-4">
+    <div class="col-md-4 col">
       Logo:
+      <p id="icon"></p>
       </div>
     <div id="displayName" class="col-md-4">
       Display Name:
