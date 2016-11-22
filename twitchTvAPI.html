@@ -11,6 +11,24 @@ body {
   color: white;
   background-size:auto;
 }
+div,output{
+  padding:10px;
+  border-radius:10px;
+  margin: 20px;
+}
+a,p{
+  font-size:20px;
+  color:white;
+  outline:none;
+}
+button:hover:not(:disabled){
+    color:red;
+}
+.btn-primary{
+  background-color: purple;
+  backface-visibility: visible;
+  cursor: pointer;
+}
 </style>
 <script>
 var channelList = {status:[],name:[],logo:[]};
@@ -32,7 +50,7 @@ $(document).ready(function(){
         statusString += "<br>"+status[i]+"<br>";
         channelList.status = status;
       }
-      $("#status").html(statusString);
+      // $("#status").html(statusString);
     });
   }
   var displayNames = [];
@@ -48,12 +66,20 @@ $(document).ready(function(){
         iconString +="<br><img SRC="+icons[i]+" width=40 height=40><br>";
         channelList.name = displayNames;
         channelList.logo = icons;
+        $('#followerInfo').prepend("<div><div class='btn-primary'><a href="+channelList.status[i]+"><h2><img SRC="+icons[i]+" width=40 height=40>"+displayNames[i] +"</h2><p>"+channelList.status[i]+"</p></a></div></div>");
       }
-      $("#icon").html(iconString);
-      $("#first").html(displayString);
+      // $("#icon").html(iconString);
+      // $("#first").html(displayString);
+
     });
+
   }
-  console.log(channelList);
+  for (var i = 0; i < channelList.status.length; i++) {
+    console.log(channelList.status[i]);
+    $('#followerInfo').prepend("<div><div class='btn-primary'><a href="+channelList.status[i]+"><h2><img SRC="+channelList.logo[i]+" width=40 height=40>"+channelList.name[i] +"</h2><p>"+channelList.status[i]+"</p></a></div></div>");
+  }
+
+  // $('#followerInfo').prepend("<div><div class='btn-primary'><a href="+channelList[0][0]+"><h2>"+channelList[0][1] +"</h2><p>"+channelList[0][2]+"</p></a></div></div>");
 });
 </script>
 <div class="container">
@@ -76,6 +102,6 @@ $(document).ready(function(){
       </div>
         </h1>
   </div>
-    <div id="followerInfo"></div>
+    <div id="followerInfo" class="output" style="color:white"></div>
 </div>
 </html>
