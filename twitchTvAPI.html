@@ -52,7 +52,7 @@ $(document).ready(function(){
   }
   var displayNames = [];
   for (var i = 0; i < channels.length; i++) {
-    var followerURL ="https://wind-bow.hyperdev.space/twitch-api/users/"+channels[i]+"?callback=?"
+    var followerURL = "https://wind-bow.hyperdev.space/twitch-api/users/"+channels[i]+"?callback=?"
     $.getJSON(followerURL, function(data2){
       displayNames.push(data2.display_name);
       icons.push(data2.logo);
@@ -60,10 +60,10 @@ $(document).ready(function(){
       var iconString = "";
       for (var i = 0; i < displayNames.length; i++) {
         displayString += "<br>"+displayNames[i]+"<br>";
-        iconString +="<br><img SRC="+icons[i]+" width=40 height=40><br>";
+        iconString += "<br><img SRC="+icons[i]+" width=40 height=40><br>";
         channelList.name = displayNames;
         channelList.logo = icons;
-        // make an array of arrays loop to display the channels 
+        //**** make an array of arrays loop to display the channels ****
         $('#followerInfo').prepend("<div><div class='btn-primary'><a href="+channelList.status[i]+"><h2><img SRC="+icons[i]+" width=40 height=40>"+displayNames[i] +"</h2><p>"+channelList.status[i]+"</p></a></div></div>");
       }
       // $("#icon").html(iconString);
