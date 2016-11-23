@@ -63,6 +63,7 @@ $(document).ready(function(){
         iconString +="<br><img SRC="+icons[i]+" width=40 height=40><br>";
         channelList.name = displayNames;
         channelList.logo = icons;
+        // make an array of arrays loop to display the channels 
         $('#followerInfo').prepend("<div><div class='btn-primary'><a href="+channelList.status[i]+"><h2><img SRC="+icons[i]+" width=40 height=40>"+displayNames[i] +"</h2><p>"+channelList.status[i]+"</p></a></div></div>");
       }
       // $("#icon").html(iconString);
