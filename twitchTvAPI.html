@@ -28,56 +28,51 @@ a,p{
 }
 </style>
 <script>
-var channelList = [status:[],name:[],logo:[]];
+var channelList = [];
 //Run out Jquery
 $(document).ready(function(){
-  var channels = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp"];
+  var channels = ["ESL_SC2"];//, "OgamingSC2", "cretetion", "freecodecamp"];
+  var eSL_SC2 = {name:"ESL_SC2", stat:"",pic:"",url:"https://www.twitch.tv/ESL_SC2"};
   var status = [];
   var icons = [];
+  var displayNames = [];
   for (var i = 0; i < channels.length; i++) {
     var url="https://wind-bow.hyperdev.space/twitch-api/streams/"+channels[i]+"?callback=?";
     $.getJSON(url, function(data1){
       if (data1.stream===null){
-        status.push("🔴");
+        eSL_SC2.stat = "Offline";
+
       } else {
-        status.push("🔵");
+        eSL_SC2.stat = "Online";
       }
       var statusString = "";
       for (var i = 0; i < status.length; i++) {
         statusString += "<br>"+status[i]+"<br>";
-        channelList.status = status;
       }
-      // $("#status").html(statusString);
+      $('#followerInfo').prepend("<p>"+status+"</p>");
     });
   }
-  var displayNames = [];
+
   for (var i = 0; i < channels.length; i++) {
     var followerURL = "https://wind-bow.hyperdev.space/twitch-api/users/"+channels[i]+"?callback=?"
     $.getJSON(followerURL, function(data2){
+      console.log(data2);
+
+      eSL_SC2.pic = data2.logo;
       displayNames.push(data2.display_name);
       icons.push(data2.logo);
+
       var displayString = "";
       var iconString = "";
-      for (var i = 0; i < displayNames.length; i++) {
+      for (var i = 0; i < 4; i++) {
         displayString += "<br>"+displayNames[i]+"<br>";
         iconString += "<br><img SRC="+icons[i]+" width=40 height=40><br>";
-        channelList.name = displayNames;
-        channelList.logo = icons;
-        //**** make an array of arrays loop to display the channels ****
-        $('#followerInfo').prepend("<div><div class='btn-primary'><a href="+channelList.status[i]+"><h2><img SRC="+icons[i]+" width=40 height=40>"+displayNames[i] +"</h2><p>"+channelList.status[i]+"</p></a></div></div>");
       }
-      // $("#icon").html(iconString);
-      // $("#first").html(displayString);
-
+        console.log(eSL_SC2.stat);
+       $('#followerInfo').prepend("<div><div id='follow' class='btn-primary'><a href="+eSL_SC2.url+"><h2><img SRC="+eSL_SC2.pic+" width=40 height=40>"+eSL_SC2.name +"</h2><p>"+eSL_SC2.stat+"</p></a></div></div>");
     });
-
   }
-  // for (var i = 0; i < channelList.status.length; i++) {
-  //   console.log(channelList.status[i]);
-  //   $('#followerInfo').prepend("<div><div class='btn-primary'><a href="+channelList.status[i]+"><h2><img SRC="+channelList.logo[i]+" width=40 height=40>"+channelList.name[i] +"</h2><p>"+channelList.status[i]+"</p></a></div></div>");
-  // }
 
-  // $('#followerInfo').prepend("<div><div class='btn-primary'><a href="+channelList[0][0]+"><h2>"+channelList[0][1] +"</h2><p>"+channelList[0][2]+"</p></a></div></div>");
 });
 </script>
 <div class="container">
@@ -101,5 +96,6 @@ $(document).ready(function(){
         </h1>
   </div>
     <div id="followerInfo" class="output" style="color:white"></div>
+    <p id="shit"><p>
 </div>
 </html>
