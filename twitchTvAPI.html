@@ -58,11 +58,9 @@ $(document).ready(function(){
     var followerURL = "https://wind-bow.hyperdev.space/twitch-api/users/"+channels[i]+"?callback=?"
     $.getJSON(followerURL, function(data2){
       console.log(data2);
-
       eSL_SC2.pic = data2.logo;
       displayNames.push(data2.display_name);
       icons.push(data2.logo);
-
       var displayString = "";
       var iconString = "";
       for (var i = 0; i < 4; i++) {
