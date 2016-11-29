@@ -31,7 +31,9 @@ a,p{
 var channelList = [];
 //Run out Jquery
 $(document).ready(function(){
-  var channels = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp"];
+  var eSL_SC2 = {name:"ESL_SC2",stat:"",pic:"",url:"https://www.twitch.tv/channelObject", game:""};
+  var oGamingSC2 = {name:"OgamingSC2",stat:"",pic:"",url:"https://www.twitch.tv/channelObject", game:""};
+  var channels = [oGamingSC2.name, eSL_SC2.name];//"ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp"];
   var channelObject = {name:"channelObject", stat:"",pic:"",url:"https://www.twitch.tv/channelObject", game:""};
   var status = [];
   var icons = [];
@@ -39,14 +41,26 @@ $(document).ready(function(){
   for (var i = 0; i < channels.length; i++) {
     var url="https://wind-bow.hyperdev.space/twitch-api/streams/"+channels[i]+"?callback=?";
     $.getJSON(url, function(data1){
-      console.log(url);
-      console.log(data1.stream.game);
-      if (data1.stream.game===null){
-        channelObject.stat = "Offline";
-        channelObject.game = "No Video"
-      } else {
-        channelObject.stat = "Online";
-        channelObject.game = data1.stream.game;
+      // Data1 has all the info we need no need for 2 calls work on that
+      console.log(data1);
+      // console.log(data1.stream.game);
+      if (data1.stream.channel.display_name===eSL_SC2.name) {
+        if (data1.stream.game===null){
+          eSL_SC2.stat = "Offline";
+          eSL_SC2.game = "No Video"
+        } else {
+          eSL_SC2.stat = "Online";
+          eSL_SC2.game = data1.stream.game;
+        }
+
+      } else if (data1.stream.channel.display_name===oGamingSC2.name) {
+        if (data1.stream.game===null){
+          oGamingSC2.stat = "Offline";
+          oGamingSC2.game = "No Video"
+        } else {
+          oGamingSC2.stat = "Online";
+          oGamingSC2.game = data1.stream.game;
+        }
       }
       var statusString = "";
       for (var i = 0; i < status.length; i++) {
@@ -59,7 +73,16 @@ $(document).ready(function(){
   for (var i = 0; i < channels.length; i++) {
   var followerURL = "https://wind-bow.hyperdev.space/twitch-api/users/"+channels[i]+"?callback=?"
     $.getJSON(followerURL, function(data2){
-    //  console.log(data2);
+    //  console.log(data2.display_name);
+    if (data2.display_name===eSL_SC2.name) {
+      eSL_SC2.pic = data2.logo;
+      $('#followerInfo').prepend("<div><div id='follow' class='btn-primary'><a href=https://www.twitch.tv/"+eSL_SC2.name+"><h2><img SRC="+eSL_SC2.pic+" width=40 height=40>"+eSL_SC2.name +"</h2><p>"+eSL_SC2.stat+"</p><p>"+eSL_SC2.game+"</p></a></div></div>");
+
+    } else if (data2.display_name===oGamingSC2.name) {
+      oGamingSC2.pic = data2.logo;
+      $('#followerInfo').prepend("<div><div id='follow' class='btn-primary'><a href=https://www.twitch.tv/"+oGamingSC2.name+"><h2><img SRC="+oGamingSC2.pic+" width=40 height=40>"+oGamingSC2.name +"</h2><p>"+oGamingSC2.stat+"</p><p>"+oGamingSC2.game+"</p></a></div></div>");
+
+    }
       channelObject.pic = data2.logo;
       channelObject.name = data2.display_name;
       displayNames.push(data2.display_name);
@@ -71,7 +94,7 @@ $(document).ready(function(){
         iconString += "<br><img SRC="+icons[i]+" width=40 height=40><br>";
       }
       //  console.log(channelObject.stat);
-       $('#followerInfo').prepend("<div><div id='follow' class='btn-primary'><a href=https://www.twitch.tv/"+channelObject.name+"><h2><img SRC="+channelObject.pic+" width=40 height=40>"+channelObject.name +"</h2><p>"+channelObject.stat+"</p><p>"+channelObject.game+"</p></a></div></div>");
+      //  $('#followerInfo').prepend("<div><div id='follow' class='btn-primary'><a href=https://www.twitch.tv/"+channelObject.name+"><h2><img SRC="+channelObject.pic+" width=40 height=40>"+channelObject.name +"</h2><p>"+channelObject.stat+"</p><p>"+channelObject.game+"</p></a></div></div>");
     });
 
   }
