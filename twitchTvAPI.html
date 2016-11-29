@@ -32,18 +32,21 @@ var channelList = [];
 //Run out Jquery
 $(document).ready(function(){
   var channels = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp"];
-  var channelObject = {name:"channelObject", stat:"",pic:"",url:"https://www.twitch.tv/channelObject"};
+  var channelObject = {name:"channelObject", stat:"",pic:"",url:"https://www.twitch.tv/channelObject", game:""};
   var status = [];
   var icons = [];
   var displayNames = [];
   for (var i = 0; i < channels.length; i++) {
     var url="https://wind-bow.hyperdev.space/twitch-api/streams/"+channels[i]+"?callback=?";
     $.getJSON(url, function(data1){
-      if (data1.stream===null){
+      console.log(url);
+      console.log(data1.stream.game);
+      if (data1.stream.game===null){
         channelObject.stat = "Offline";
-
+        channelObject.game = "No Video"
       } else {
         channelObject.stat = "Online";
+        channelObject.game = data1.stream.game;
       }
       var statusString = "";
       for (var i = 0; i < status.length; i++) {
@@ -54,9 +57,9 @@ $(document).ready(function(){
   }
 
   for (var i = 0; i < channels.length; i++) {
-    var followerURL = "https://wind-bow.hyperdev.space/twitch-api/users/"+channels[i]+"?callback=?"
+  var followerURL = "https://wind-bow.hyperdev.space/twitch-api/users/"+channels[i]+"?callback=?"
     $.getJSON(followerURL, function(data2){
-      console.log(data2.logo);
+    //  console.log(data2);
       channelObject.pic = data2.logo;
       channelObject.name = data2.display_name;
       displayNames.push(data2.display_name);
@@ -68,8 +71,9 @@ $(document).ready(function(){
         iconString += "<br><img SRC="+icons[i]+" width=40 height=40><br>";
       }
       //  console.log(channelObject.stat);
-       $('#followerInfo').prepend("<div><div id='follow' class='btn-primary'><a href=https://www.twitch.tv/"+channelObject.name+"><h2><img SRC="+channelObject.pic+" width=40 height=40>"+channelObject.name +"</h2><p>"+channelObject.stat+"</p></a></div></div>");
+       $('#followerInfo').prepend("<div><div id='follow' class='btn-primary'><a href=https://www.twitch.tv/"+channelObject.name+"><h2><img SRC="+channelObject.pic+" width=40 height=40>"+channelObject.name +"</h2><p>"+channelObject.stat+"</p><p>"+channelObject.game+"</p></a></div></div>");
     });
+
   }
 });
 </script>
