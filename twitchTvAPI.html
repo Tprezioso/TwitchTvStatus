@@ -32,8 +32,7 @@ var channelList = [];
 //Run out Jquery
 $(document).ready(function(){
   var channels = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp"];
-  var eSL_SC2 = {name:"ESL_SC2", stat:"",pic:"",url:"https://www.twitch.tv/ESL_SC2"};
-  var ogamingSC2 = {name:"OgamingSC2", stat:"", pic:"", url:"https://www.twitch.tv/OgamingSC2"}
+  var channelObject = {name:"channelObject", stat:"",pic:"",url:"https://www.twitch.tv/channelObject"};
   var status = [];
   var icons = [];
   var displayNames = [];
@@ -41,10 +40,10 @@ $(document).ready(function(){
     var url="https://wind-bow.hyperdev.space/twitch-api/streams/"+channels[i]+"?callback=?";
     $.getJSON(url, function(data1){
       if (data1.stream===null){
-        eSL_SC2.stat = "Offline";
+        channelObject.stat = "Offline";
 
       } else {
-        eSL_SC2.stat = "Online";
+        channelObject.stat = "Online";
       }
       var statusString = "";
       for (var i = 0; i < status.length; i++) {
@@ -58,8 +57,8 @@ $(document).ready(function(){
     var followerURL = "https://wind-bow.hyperdev.space/twitch-api/users/"+channels[i]+"?callback=?"
     $.getJSON(followerURL, function(data2){
       console.log(data2.logo);
-      eSL_SC2.pic = data2.logo;
-      eSL_SC2.name = data2.display_name;
+      channelObject.pic = data2.logo;
+      channelObject.name = data2.display_name;
       displayNames.push(data2.display_name);
       icons.push(data2.logo);
       var displayString = "";
@@ -68,8 +67,8 @@ $(document).ready(function(){
         displayString += "<br>"+displayNames[i]+"<br>";
         iconString += "<br><img SRC="+icons[i]+" width=40 height=40><br>";
       }
-      //  console.log(eSL_SC2.stat);
-       $('#followerInfo').prepend("<div><div id='follow' class='btn-primary'><a href=https://www.twitch.tv/"+eSL_SC2.name+"><h2><img SRC="+eSL_SC2.pic+" width=40 height=40>"+eSL_SC2.name +"</h2><p>"+eSL_SC2.stat+"</p></a></div></div>");
+      //  console.log(channelObject.stat);
+       $('#followerInfo').prepend("<div><div id='follow' class='btn-primary'><a href=https://www.twitch.tv/"+channelObject.name+"><h2><img SRC="+channelObject.pic+" width=40 height=40>"+channelObject.name +"</h2><p>"+channelObject.stat+"</p></a></div></div>");
     });
   }
 });
