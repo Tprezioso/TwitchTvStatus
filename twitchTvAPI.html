@@ -31,21 +31,21 @@ a,p{
 var channelList = [];
 $(document).ready(function(){
   var channelObject = {name:"channelObject",stat:"",pic:"",url:"https://www.twitch.tv/channelObject", game:""};
-  var channels = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp"];
+  var channels = ["ESL_SC2", "OgamingSC2", "cretetion","freecodecamp","storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"];
   for (var i = 0; i < channels.length; i++) {
-    var url="https://wind-bow.hyperdev.space/twitch-api/streams/"+channels[i]+"?callback=?";
+    var url="https://wind-bow.hyperdev.space/twitch-api/channels/"+channels[i]+"?callback=?";
     $.getJSON(url, function(data1){
       console.log(data1);
-        if (data1.stream.game===null){
+        if (data1.game===null){
           channelObject.stat = "Offline";
           channelObject.game = "No Video"
         } else {
           channelObject.stat = "Online";
-          channelObject.game = data1.stream.game;
+          channelObject.game = data1.game;
         }
-      channelObject.name = data1.stream.channel.name;
-      channelObject.pic = data1.stream.channel.logo;
-      channelObject.url = data1.stream.channel.url;
+      channelObject.name = data1.display_name;
+      channelObject.pic = data1.logo;
+      channelObject.url = data1.url;
       $('#followerInfo').prepend("<div><div id='follow' class='btn-primary'><a href="+channelObject.url+"><h2><img SRC="+channelObject.pic+" width=40 height=40>"+channelObject.name +"</h2><p>"+channelObject.stat+"</p><p>"+channelObject.game+"</p></a></div></div>");
     });
   }
