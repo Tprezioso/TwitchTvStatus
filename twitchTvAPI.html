@@ -46,15 +46,16 @@ $(document).ready(function(){
       channelObject.name = data1.display_name;
       channelObject.pic = data1.logo;
       channelObject.url = data1.url;
-      $('#followerInfo').prepend("<div><div id='follow' class='btn-primary'><a href="+channelObject.url+"><h2><img SRC="+channelObject.pic+" width=40 height=40>"+channelObject.name +"</h2><p>"+channelObject.stat+"</p><p>"+channelObject.game+"</p></a></div></div>");
+      $('#followerInfo').prepend("<div><div id='follow' class='btn-primary'><a href="+channelObject.url+"><h2 style='font-size: 60px'><img SRC="+channelObject.pic+" width=200 height=200>"+channelObject.name +"</h2><p style='font-size: 60px'>"+channelObject.stat+"</p><p style='font-size: 60px'>"+channelObject.game+"</p></a></div></div>");
     });
   }
 });
 </script>
 <div class="container">
   <div id="header" class="text-center">
-    <h1>Use the Twitch TV JSON</h1>
+    <h1  style="">Use the Twitch TV JSON
   </div>
-    <div id="followerInfo" class="output" style="color:white"></div>
+    <div id="followerInfo" class="output text-center" style="color:white"></div>
 </div>
+</h1>
 </html>
