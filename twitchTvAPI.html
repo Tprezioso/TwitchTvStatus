@@ -6,25 +6,25 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
 </header>
 <style>
-body {
+body  {
   background-image: url('http://wallpapercraze.com/images/wallpapers/twitch_w1.jpeg');
   color: white;
   background-size:auto;
 }
 
-div,output{
+div,output  {
   padding:10px;
   border-radius:10px;
   margin: 20px;
 }
 
-a,p{
+a,p {
   font-size:20px;
   color:white;
   outline:none;
 }
 
-.btn-primary{
+.btn-primary  {
   background-color: purple;
   cursor: pointer;
 }
@@ -36,9 +36,9 @@ $(document).ready(function(){
   var channels = ["ESL_SC2", "OgamingSC2", "cretetion","freecodecamp","storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"];
   for (var i = 0; i < channels.length; i++) {
     var url="https://wind-bow.hyperdev.space/twitch-api/channels/"+channels[i]+"?callback=?";
-    $.getJSON(url, function(data1){
+    $.getJSON(url, function(data1) {
       console.log(data1);
-        if (data1.game===null){
+        if (data1.game===null) {
           channelObject.stat = "Offline";
           channelObject.game = "No Video"
         } else {
